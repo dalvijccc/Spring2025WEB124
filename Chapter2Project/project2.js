@@ -1,5 +1,5 @@
-//Danyal Alvi
-//03/16/2025
+// Danyal Alvi
+// 03/16/2025
 
 let myName = "Danyal Alvi";
 let para1 = document.getElementById("p1");

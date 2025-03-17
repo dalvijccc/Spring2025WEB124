@@ -4,7 +4,6 @@ para1.textContent = myName;
 
 let n1 = 8;
 let n2 = 5;
-
 let numberSum = n1 + n2;
 document.getElementById("p2").textContent = numberSum;
 

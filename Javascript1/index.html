@@ -1,0 +1,108 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>JS Drum Kit</title>
+  <link rel="stylesheet" href="style.css">
+  <link rel="icon" href="https://fav.farm/✅" />
+  <meta name="author" content="Danyal Alvi">
+  <meta name="date" content="04/10/2025">
+  <!--Danyal Alvi 04/10/2025-->
+  <!-- Sourced from https://javascript30.com/ Javascript Drum Kit -->
+  <!--What was new for me was understanding how to data-key worked. 
+    At first I was confused on what it meant till I realized that each character has its own numeric data key.
+    I have never tinkered with a javascript website using wav files before which was a good learning experience.
+    -->
+  <!--For the HTML I changed the data-keys for different keyboard inputs and added my own wav files.
+      For the CSS I changed the background image and the color of the effects when using the keyboard.
+      For JS I added a way to use the mouse click to activate sounds.
+    -->
+</head>
+<body>
+
+
+  <div class="keys">
+    <div data-key="81" class="key">
+      <kbd>Q</kbd>
+      <span class="sound">Truck</span>
+    </div>
+    <div data-key="87" class="key">
+      <kbd>W</kbd>
+      <span class="sound">Triple</span>
+    </div>
+    <div data-key="69" class="key">
+      <kbd>E</kbd>
+      <span class="sound">Small</span>
+    </div>
+    <div data-key="82" class="key">
+      <kbd>R</kbd>
+      <span class="sound">Regular</span>
+    </div>
+    <div data-key="84" class="key">
+      <kbd>T</kbd>
+      <span class="sound">Old</span>
+    </div>
+    <div data-key="89" class="key">
+      <kbd>Y</kbd>
+      <span class="sound">Multi</span>
+    </div>
+    <div data-key="85" class="key">
+      <kbd>U</kbd>
+      <span class="sound">Long</span>
+    </div>
+    <div data-key="73" class="key">
+      <kbd>I</kbd>
+      <span class="sound">Beat</span>
+    </div>
+    <div data-key="79" class="key">
+      <kbd>O</kbd>
+      <span class="sound">Double</span>
+    </div>
+  </div>
+
+  <audio data-key="81" src="sounds/truck.wav"></audio>
+  <audio data-key="87" src="sounds/triplehorn.wav"></audio>
+  <audio data-key="69" src="sounds/smallhorn.wav"></audio>
+  <audio data-key="82" src="sounds/regularhorn.wav"></audio>
+  <audio data-key="84" src="sounds/oldcar.wav"></audio>
+  <audio data-key="89" src="sounds/multihorn.wav"></audio>
+  <audio data-key="85" src="sounds/longhorn.wav"></audio>
+  <audio data-key="73" src="sounds/hornbeat.wav"></audio>
+  <audio data-key="79" src="sounds/doublehorn.wav"></audio>
+
+<script>
+  function removeTransition(e) {
+    if (e.propertyName !== 'transform') return;
+    e.target.classList.remove('playing');
+  }
+
+  function playSound(e) {
+    const audio = document.querySelector(`audio[data-key="${e.keyCode}"]`);
+    const key = document.querySelector(`div[data-key="${e.keyCode}"]`);
+    if (!audio) return;
+
+    key.classList.add('playing');
+    audio.currentTime = 0;
+    audio.play();
+  }
+
+  function clickSound(e) {
+    const key = e.currentTarget;
+    const keyCode = key.getAttribute('data-key');
+    const audio = document.querySelector(`audio[data-key="${keyCode}"]`);
+    if (!audio) return;
+
+    key.classList.add('playing');
+    audio.currentTime = 0;
+    audio.play();
+  }
+
+  const keys = Array.from(document.querySelectorAll('.key'));
+  keys.forEach(key => key.addEventListener('transitionend', removeTransition));
+  keys.forEach(key => key.addEventListener('click', clickSound));
+  window.addEventListener('keydown', playSound);
+</script>
+
+
+</body>
+</html>
